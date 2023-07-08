@@ -1,0 +1,14 @@
+@Metadata.layer: #CORE
+annotate entity ZS3_C_Purchase_OVP_Filter
+    with 
+{
+  //  PurchaseOrder;
+  @UI.selectionField: [{ position: 10  }]
+  @EndUserText.label: 'Status'
+    PurchaseStatus;
+  @UI.selectionField: [{ position: 20  }]
+  @EndUserText.label: 'Priority'
+    Priority;
+
+    
+}

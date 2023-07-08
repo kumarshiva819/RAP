@@ -1,0 +1,61 @@
+unmanaged implementation in class zbp_s3_co_overallpopricetp_u unique;
+strict ( 2 );
+
+define behavior for ZS3_CO_OVERALLPOPRICETP_U alias PurchaseOrders
+//late numbering
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+//  field ( readonly ) PurchaseOrder;
+  create;
+  update;
+  delete;
+  association _PoItems { create; }
+
+    mapping for zs3_poheader_db {
+    PurchaseOrder   = po_order;
+    Description     = po_desc;
+    OrderType       = po_type;
+    CompanyCode     = comp_code;
+    PurchaseOrg     = po_org ;
+    PurchaseStatus  =  po_status;
+    Supplier        =  supplier;
+    Plant           =  plant;
+    CreateBy        = create_by;
+    CreatedDateTime = created_date_time;
+    ChangedDateTime = changed_date_time;
+    Imageurl        = imageurl;
+    last_changed_at = last_changed_at;
+  }
+}
+
+define behavior for ZS3_I_PURCHASEITEMSTP_U alias PurchaseItems
+//late numbering
+lock dependent by _PurchaseHeader
+authorization dependent by _PurchaseHeader
+//etag master <field_name>
+{
+  update;
+  delete;
+  field ( readonly ) PurchaseOrder;
+
+  association _PurchaseHeader;
+
+    mapping for zs3_poitem_db {
+   PurchaseOrder      = po_order;
+   PurchaseItem       = po_item;
+   ShortText          = short_text;
+   Material           = material;
+   Plant              = plant;
+   MaterialGroup      = mat_group;
+   OrderQunt          = order_qunt;
+   OrderUnit          = order_unit;
+   ProductPrice       = product_price;
+   PriceUnit          = price_unit;
+   LocalLastChangedBy = local_last_changed_by;
+   LocalLastChangedAt = local_last_changed_at;
+
+  }
+
+}

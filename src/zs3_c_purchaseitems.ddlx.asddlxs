@@ -1,0 +1,64 @@
+@Metadata.layer: #CORE
+
+@UI.headerInfo: { 
+ 
+  typeName: 'Purchase Items',
+  typeNamePlural: 'Purchase Item' ,
+  title: {  value: 'PurchaseItem' } ,
+  description: {  
+   label: 'Purchase Items',
+   type: #STANDARD,
+   value: 'ShortText'
+   
+               }
+
+}
+annotate entity ZS3_C_PurchaseItems
+    with 
+{
+@UI.facet: [{ 
+    id : 'ItemInfo',
+    purpose: #STANDARD,
+    type:  #COLLECTION,
+    label : 'Item overview'
+           },
+           
+     { 
+      id : 'ItemtxtInfo',
+      purpose: #STANDARD,
+      type: #FIELDGROUP_REFERENCE,
+      parentId: 'ItemInfo',
+      targetQualifier: 'Itemtxt'
+     }
+           ] 
+
+@UI.lineItem: [{ position: 10 , label: 'Purchase Order' , importance:  #HIGH }]
+    PurchaseOrder;
+@UI.lineItem: [{ position: 20 , label: 'Purchase Items' , importance:  #HIGH }]
+    PurchaseItem;
+ @UI.lineItem: [{ position: 30 , label: 'Description' , importance:  #HIGH }]
+ @UI.fieldGroup: [{ position: 10 , label : 'Material Text' , qualifier: 'Itemtxt' }]
+    ShortText;
+ @UI.lineItem: [{ position: 40 , label: 'Material' , importance:  #HIGH }]
+    Material;
+@UI.lineItem: [{ position: 50 , label: 'Plant'  }]
+    Plant;
+@UI.lineItem: [{ position: 60 , label: 'Material Group'  }]
+    MaterialGroup;
+@UI.lineItem: [{ position: 70 , label: 'Order Quantity'  }]
+    OrderQunt;
+@UI.lineItem: [{ position: 80 , label: 'Order Unit'  }]
+    OrderUnit;
+@UI.lineItem: [{ position: 90 , label: 'Item Price'  }]
+    ItemPrice;
+@UI.lineItem: [{ position: 100 , label: 'Product Price'  }]
+    ProductPrice;
+@UI.lineItem: [{ position: 110 , label: 'Price Unit'  }]
+    PriceUnit;
+  //  LocalLastChangedBy;
+   // LocalLastChangedAt;
+    /* Associations */
+   // _Currency;
+    //_PurchaseHeader;
+    
+}

@@ -1,0 +1,5 @@
+@EndUserText.label: 'ZS3_PRODUCTS'
+@OData.schema.name: 'ZPDCDS_SRV'
+define service ZS3_PRODUCTS {
+ expose ZZS3SEPMRA_I_PRODUCT_E; 
+ } 

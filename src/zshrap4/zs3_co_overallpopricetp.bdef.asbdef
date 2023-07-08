@@ -1,0 +1,116 @@
+managed implementation in class zbp_s3_co_overallpopricetp unique;
+strict ( 2 );
+with draft;
+define behavior for ZS3_CO_OverallPOPriceTP alias PurchaseOrder
+persistent table zs3_poheader_db
+draft table zs3_poheader_v1
+lock master
+total etag last_changed_at
+early numbering
+authorization master ( instance )
+etag master ChangedDateTime
+
+{
+  field ( readonly ) PurchaseOrder , PurchaseTotalPrice ;
+  field ( mandatory )  OrderType , Description ;
+  create;
+  update;
+  delete;
+  action Copy result[1] $self;
+  action WithdrawApproval result[1] $self;
+  validation ValidateStatus on save { create; field PurchaseStatus; }
+
+  draft action Edit;
+  draft action Resume;
+  draft action Discard;
+  draft action Activate;
+  draft determine action Prepare
+  {
+    validation ValidateStatus;
+  }
+
+  association _PoItems { create; with draft; }
+  association _PoAttachment { create; with draft;  }
+  mapping for zs3_poheader_db {
+    PurchaseOrder   = po_order;
+    Description     = po_desc;
+    OrderType       = po_type;
+    CompanyCode     = comp_code;
+    PurchaseOrg     = po_org ;
+    PurchaseStatus  =  po_status;
+    Supplier        =  supplier;
+    Plant           =  plant;
+    CreateBy        = create_by;
+    CreatedDateTime = created_date_time;
+    ChangedDateTime = changed_date_time;
+    Imageurl        = imageurl;
+    last_changed_at = last_changed_at;
+  }
+}
+
+
+define behavior for ZS3_I_PurchaseItemsTP alias PurchaseItem
+implementation in class Zbp_S3_I_PurchaseItemsTP unique
+persistent table zs3_poitem_db
+draft table zs3_poitem_db_v1
+lock dependent by _PurchaseHeader
+early numbering
+authorization dependent by _PurchaseHeader
+etag master LocalLastChangedAt
+
+{
+  update;
+  delete;
+  field ( readonly ) PurchaseOrder;
+  field ( readonly ) PurchaseItem;
+  association _PurchaseHeader { with draft; }
+  determination setPurchaseStatus on save { create; field OrderQunt, OrderUnit, ProductPrice, PriceUnit; }
+
+//  draft determine action Prepare
+//  {
+//    determination setPurchaseStatus;
+//  }
+  mapping for zs3_poitem_db {
+   PurchaseOrder      = po_order;
+   PurchaseItem       = po_item;
+   ShortText          = short_text;
+   Material           = material;
+   Plant              = plant;
+   MaterialGroup      = mat_group;
+   OrderQunt          = order_qunt;
+   OrderUnit          = order_unit;
+   ProductPrice       = product_price;
+   PriceUnit          = price_unit;
+   LocalLastChangedBy = local_last_changed_by;
+   LocalLastChangedAt = local_last_changed_at;
+
+  }
+
+}
+
+define behavior for ZS3_I_PoAttachment alias PoAttachment
+implementation in class Zbp_S3_I_PoAttachment unique
+persistent table zs3_poattachment
+draft table zs3_poattch_v1
+lock dependent by _Header
+early numbering
+authorization dependent by _Header
+etag master LastChangedAt
+
+{
+  update;
+  delete;
+  field ( readonly ) Purchaseordernumber , AttachId;
+  association _Header { with draft; }
+
+  mapping for zs3_poattachment {
+   Purchaseordernumber = purchaseordernumber;
+   AttachId            = attach_id;
+   Mimetype            = mimetype;
+   Filename            = filename;
+   Attachment          = attachment;
+   LastChangedAt       = last_changed_at;
+
+  }
+
+}

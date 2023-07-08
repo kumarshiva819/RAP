@@ -1,0 +1,31 @@
+@Metadata.layer: #CORE
+
+
+annotate entity ZS3_C_PoListCard with
+{
+  @UI.lineItem: [{ position: 10 , label: 'Purchase Order' }]
+  PurchaseOrder;
+  @UI.lineItem: [{ position: 20 , label: 'Created By' }]
+  @UI.dataPoint : {  title: ' Created By' }
+  CreateBy;
+  @UI.lineItem: [{  position: 30 , label: 'Created On' }]
+  @UI.dataPoint: {  title: 'Created On' }
+  CreatedDateTime;
+  @UI: {
+      dataPoint: {  title: 'Overall Budget',
+                    valueFormat.numberOfFractionalDigits: 2,
+                    minimumValue: 0,
+                    maximumValue: 100,
+                    criticalityCalculation: {
+                       improvementDirection: #MINIMIZE,
+                       toleranceRangeHighValue: 80, // upto 80% is okay, it will show in green
+                       deviationRangeHighValue: 100 // if it crosses 100 %, not okay, show in red
+                       // between 80 to 100 , automatically taken as yellow
+                                            }
+                  }
+
+       }
+   @UI.lineItem: [{ position: 40 , label: 'Budget' , type: #AS_DATAPOINT }]
+  BudgetUsage;
+
+}

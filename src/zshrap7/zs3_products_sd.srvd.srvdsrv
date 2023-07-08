@@ -1,0 +1,4 @@
+@EndUserText.label: 'products service definition'
+define service ZS3_Products_SD {
+  expose ZS3_PRODUCTS_UNMANAGED_QUERY;
+}

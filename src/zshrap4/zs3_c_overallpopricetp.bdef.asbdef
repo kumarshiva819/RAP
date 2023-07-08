@@ -1,0 +1,36 @@
+projection;
+strict ( 2 );
+use draft;
+define behavior for ZS3_C_OverallPOPriceTP //alias <alias_name>
+{
+  use create;
+  use update;
+  use delete;
+  use action Copy as CopyPO ;
+  use action WithdrawApproval as WithDrawApproval;
+
+  use action Edit;
+  use action Activate;
+  use action Prepare;
+  use action Discard;
+  use action Resume;
+
+  use association _PoItems { create; with draft; }
+  use association _PoAttachment { create; with draft; }
+}
+
+define behavior for ZS3_C_PurchaseItemsTP //alias <alias_name>
+{
+  use update;
+  use delete;
+
+  use association _PurchaseHeader { with draft; }
+}
+
+define behavior for ZS3_C_PoAttachment//alias <alias_name>
+{
+  use update;
+  use delete;
+
+  use association _Header{ with draft; }
+}

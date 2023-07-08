@@ -1,0 +1,6 @@
+@EndUserText.label: 'Service definition for PO transactional'
+define service ZS3_PurchaseOrdersBO_SD {
+  expose ZS3_C_OverallPOPriceTP;
+  expose ZS3_C_PurchaseItemsTP;
+  expose ZS3_C_PoAttachment;
+}

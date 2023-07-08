@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service definition for PO unmanaged'
+define service ZS3_PurchaseOrdersUnmanaged_SD {
+  expose ZS3_C_OVERALLPOPRICETP_U as PurchaseOrders;
+  expose ZS3_C_PURCHASEITEMSTP_U as PurchaseItems;
+}

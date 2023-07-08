@@ -1,0 +1,128 @@
+@Metadata.layer: #CORE
+@UI.headerInfo: { 
+ 
+  typeName: 'Purchase Order',
+  typeNamePlural: 'Purchase Orders' ,
+  title: {  value: 'Description' } ,
+  imageUrl: 'Imageurl',
+  description: {  
+   label: 'Manage Purchase Orders',
+   type: #STANDARD,
+   value: 'OrderType'
+   
+               }
+
+}
+
+annotate entity ZS3_C_PurchaseHeaderDetails
+    with 
+{
+
+ @UI.facet: [{
+     id      : 'Collection',
+     purpose : #STANDARD,
+     type    : #COLLECTION,
+     label   : 'General Information'
+    },
+    
+    {
+      id     : 'BasicData',
+      purpose: #STANDARD,
+      type   : #FIELDGROUP_REFERENCE,
+      label  : 'Basic Data',
+      parentId: 'Collection',
+      position: 10,
+      targetQualifier: 'BasicGroup'
+    },
+    
+     {
+      id     : 'OrgInfo',
+      purpose: #STANDARD,
+      type   : #FIELDGROUP_REFERENCE,
+      label  : 'Organization Details',
+      parentId: 'Collection',
+      position: 20,
+      targetQualifier: 'OrgGroup'
+    },
+    
+       {
+      id     : 'SuppInfo',
+      purpose: #STANDARD,
+      type   : #FIELDGROUP_REFERENCE,
+      label  : 'Supplier Details',
+      parentId: 'Collection',
+      position: 30,
+      targetQualifier: 'SupplGroup'
+        } ,
+        
+         {
+      id     : 'ItemInfo',
+      purpose: #STANDARD,
+      type   : #LINEITEM_REFERENCE,
+      label  : 'Item Details',
+      position: 20,
+      targetElement: '_PoItems'
+        }  ,
+        
+        {
+         id : 'Header1',
+         purpose: #HEADER,
+         type: #DATAPOINT_REFERENCE,
+         targetQualifier: 'OrderDate',
+         position: 10
+        } ,
+        
+               {
+         id : 'Header2',
+         purpose: #HEADER,
+         type: #DATAPOINT_REFERENCE,
+         targetQualifier: 'Status',
+         position: 20
+        }   
+    
+    
+            ]
+ 
+ @UI.lineItem: [{ position: 10 , label: 'Purchase Order', importance: #HIGH}]
+ @UI.selectionField: [{ position: 10  }]
+ @UI.fieldGroup: [{ position: 10 , label : 'Purchase Order' , qualifier: 'BasicGroup' }]
+    PurchaseOrder;
+ @UI.lineItem: [{ position: 20 , label: 'Description' , importance: #HIGH }]
+    Description;
+ @UI.lineItem: [{ position: 30 , label: 'Total Price', importance: #HIGH }]
+  @UI.fieldGroup: [{ position: 30 , label : 'Total Price' , qualifier: 'BasicGroup' }]
+    PurchaseTotalPrice;
+ @UI.lineItem: [{ position: 40 , label: 'Price Unit' , importance: #HIGH}]
+  @UI.fieldGroup: [{ position: 40 , label : 'Unit' , qualifier: 'BasicGroup' }]
+    PriceUnit;
+ @UI.lineItem: [{ position: 50 , label: 'Order Type' , importance: #HIGH}]
+  @UI.selectionField: [{ position: 20  }]
+   @UI.fieldGroup: [{ position: 20 , label : 'Purchase Order Type' , qualifier: 'BasicGroup' }]
+    OrderType;
+ @UI.lineItem: [{ position: 60 , label: 'Company Code', importance: #HIGH}]
+  @UI.fieldGroup: [{ position: 10 , label : 'Company Code' , qualifier: 'OrgGroup' }]
+    CompanyCode;
+ @UI.lineItem: [{ position: 70 , label: 'Purchase Org', importance: #HIGH}]
+  @UI.fieldGroup: [{ position: 20 , label : 'Purchase Organization' , qualifier: 'OrgGroup' }]
+    PurchaseOrg;
+ @UI.lineItem: [{ position: 80 , label: 'Status', importance: #HIGH , criticality: 'Criticalityvalue'}]
+   @UI.selectionField: [{ position: 50  }]
+   @UI.dataPoint: { title: 'Order Status' , qualifier: 'Status' , criticality: 'Criticalityvalue'}
+    PurchaseStatus;
+ @UI.lineItem: [{ position: 90 , label: 'Supplier', importance: #HIGH , type: #AS_CONTACT , value: '_Suppl' }]
+  @UI.selectionField: [{ position: 30 }]
+   @UI.fieldGroup: [{ position: 10 , label : 'Supplier' , qualifier: 'SupplGroup' }]
+    Supplier;
+ @UI.lineItem: [{ position: 100 , label: 'Plant', importance: #HIGH}]
+  @UI.fieldGroup: [{ position: 30 , label : 'Plant' , qualifier: 'OrgGroup' }]
+    Plant;
+ @UI.lineItem: [{ position: 110 , label: 'Created By'}]
+  @UI.selectionField: [{ position: 40  }]
+    CreateBy;
+ @UI.lineItem: [{ position: 120 , label: 'Created on'}]
+ @UI.dataPoint: { title: 'Creation Date' , qualifier: 'OrderDate'}
+    CreatedDateTime;
+ @UI.lineItem: [{ position: 130 , label: 'Changed on'}]
+    ChangedDateTime;
+    
+}

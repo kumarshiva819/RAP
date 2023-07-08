@@ -1,0 +1,6 @@
+@EndUserText.label: 'service definition for Overview page'
+define service ZS3_PurchaseOVP_SD {
+  expose ZS3_C_Purchase_OVP_Filter as PoOvpFilter;
+  expose ZS3_C_PoCardDonut as PODonut;
+  expose ZS3_C_PoListCard as PoListCard;
+}

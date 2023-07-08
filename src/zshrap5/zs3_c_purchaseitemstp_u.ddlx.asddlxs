@@ -1,0 +1,133 @@
+@Metadata.layer: #CORE
+
+@UI.headerInfo: { 
+
+  imageUrl: 'Imageurl',
+  typeName: 'Purchase Order',
+  typeNamePlural: 'Purchase Orders',
+  
+  title.value: 'Description',
+  
+  description: { 
+     label: 'Manage Purchase Orders',
+     type: #STANDARD,
+     value: 'OrderType'
+   }
+}
+
+annotate entity ZS3_C_OVERALLPOPRICETP_U
+    with 
+{
+
+   @UI.facet: [ 
+   
+      { 
+      id: 'Collection',
+      purpose: #STANDARD,
+      type: #COLLECTION,
+      label: 'General Information'
+      },
+      
+      {
+       id : 'GeneralInfo',
+       purpose: #STANDARD,
+       type: #FIELDGROUP_REFERENCE ,
+       parentId: 'Collection',
+       position: 10,
+       label: 'General Information',
+       targetQualifier: 'GeneralInfo'
+      },
+
+      {
+       id : 'OrgInfo',
+       purpose: #STANDARD,
+       type: #FIELDGROUP_REFERENCE ,
+       parentId: 'Collection',
+       position: 20,
+       label: 'Organization Data',
+       targetQualifier: 'OrgInfo'
+      },
+ 
+       {
+       id : 'OverallInfo',
+       purpose: #STANDARD,
+       type: #FIELDGROUP_REFERENCE ,
+       parentId: 'Collection',
+       position: 30,
+       label: 'Overall Data',
+       targetQualifier: 'OverallInfo'
+      },   
+      
+       { 
+      id: 'ItemInfo',
+      purpose: #STANDARD,
+      type: #LINEITEM_REFERENCE,
+      position: 20,
+      label: 'Item details',
+      targetElement: '_PoItems'
+      },
+     
+       {
+         id : 'Header1',
+         purpose: #HEADER,
+         type: #DATAPOINT_REFERENCE,
+         targetQualifier: 'TotalPrice',
+         position: 10
+        },
+
+       {
+         id : 'Header2',
+         purpose: #HEADER,
+         type: #DATAPOINT_REFERENCE,
+         targetQualifier: 'PoStatus',
+         position: 20
+        } 
+                 
+      ]
+
+@UI.selectionField: [{ position: 10 }]
+@UI.lineItem: [{ position: 10 , label: 'Purchase Order' , importance: #HIGH } ]
+@UI.fieldGroup: [{ position: 10, label: 'Purchase Order' , qualifier: 'GeneralInfo' }]
+    PurchaseOrder;
+@UI.fieldGroup: [{ position: 20, label: 'Description' , qualifier: 'GeneralInfo' }]
+    Description;
+@UI.lineItem: [{ position: 20 , label: 'Total Item Price' , importance: #HIGH }]
+@UI.fieldGroup: [{ position: 30, label: 'Overall Price' , qualifier: 'GeneralInfo' }]
+@UI.dataPoint: { title: 'Total Price', qualifier: 'TotalPrice' }
+    PurchaseTotalPrice;
+//    PriceUnit;
+@UI.lineItem: [{ position: 30 , label: 'Order Type' , importance: #HIGH }]
+@UI.selectionField: [{ position: 20 }]
+@UI.fieldGroup: [{ position: 40, label: 'Order Type' , qualifier: 'GeneralInfo' }]
+    OrderType;
+@UI.lineItem: [{ position: 40 , label: 'Company Code' , importance: #HIGH }]
+@UI.selectionField: [{ position: 30 }]
+@UI.fieldGroup: [{ position: 10, label: 'Company Code' , qualifier: 'OrgInfo' }]
+    CompanyCode;
+@UI.lineItem: [{ position: 50 , label: 'Purchase Organization' , importance: #HIGH }]
+@UI.selectionField: [{ position: 40 }]
+@UI.fieldGroup: [{ position: 20, label: 'Purchase Organization' , qualifier: 'OrgInfo' }]
+    PurchaseOrg;
+@UI.lineItem: [{ position: 60 , label: 'Purchase Order Status' , importance: #HIGH  , criticality: 'CriticaValue'} ]
+@UI.selectionField: [{ position: 50 }]
+@UI.fieldGroup: [{ position: 10, label: 'Status' , qualifier: 'OverallInfo' }]
+@UI.dataPoint: { title: 'Status', qualifier: 'PoStatus' , criticality: 'CriticaValue'}
+    PurchaseStatus;
+//    CriticaValue;
+@UI.lineItem: [{ position: 70 , label: 'Supplier' , importance: #HIGH }]
+@UI.selectionField: [{ position: 60 }]
+@UI.fieldGroup: [{ position: 20, label: 'Supplier' , qualifier: 'OverallInfo' }]
+    Supplier;
+@UI.lineItem: [{ position: 80 , label: 'Plant' , importance: #HIGH }]
+@UI.selectionField: [{ position: 70 }]
+@UI.fieldGroup: [{ position: 30, label: 'Plant' , qualifier: 'OrgInfo' }]
+    Plant;
+@UI.lineItem: [{ position: 90 , label: 'Created by' , importance: #HIGH }]
+    CreateBy;
+//    CreatedDateTime;
+//    ChangedDateTime;
+//    last_changed_at;
+@UI.hidden: true
+    Imageurl;
+    
+}

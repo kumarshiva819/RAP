@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>Update PO</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZS3_FG_UPDATE_POTOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZS3_FG_UPDATE_PO</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>Z_S3_FM_UPD_PO</FUNCNAME>
+     <SHORT_TEXT>Update PO</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IM_PO_HEADER</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZIF_S3_PO_TYPES=&gt;MT_PO_HEADER</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IM_PO_ITEMS</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZIF_S3_PO_TYPES=&gt;MT_PO_ITEM</TYP>
+      </RSIMP>
+     </IMPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IM_PO_HEADER</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IM_PO_ITEMS</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>
